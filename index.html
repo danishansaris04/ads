@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <!--
   ADS.HTML — upload this file to your real hosted domain
-  (e.g. the same GitHub Pages repo where app.js already lives:
-  https://danishansaris04.github.io/dflixadmin/ads.html)
+  (https://dflixads.netlify.app/ads.html)
 
-  This tiny page's ONLY job is to run the Adsterra script inside a
-  document whose origin is a real http(s) domain. The main app
-  (index.html) stays local inside assets/ and loads THIS page inside
-  an <iframe>, so your login flow (Android.login / TokenManager) is
-  never touched or put at risk.
+  Adsterra hata diya, ab Monetag lagaya hai. Ye page bottom-nav ke
+  upar wali 50px banner strip me iframe se load hota hai
+  (assets/index.html -> #adBanner -> <iframe src=".../ads.html">).
 
-  STEPS:
-  1. Go to your Adsterra dashboard -> add this exact domain
-     (danishansaris04.github.io or your own domain) as a site.
-  2. Create a "Banner" ad zone sized 320x50 (matches the iframe's
-     height of 50px set in index.html).
-  3. Adsterra will give you a <script> snippet - paste it below,
-     replacing the placeholder comment.
-  4. Upload this file next to app.js on GitHub Pages (or Firebase
-     Hosting / Netlify - anywhere that gives you a real https URL).
-  5. Make sure the <iframe src="..."> in assets/index.html points to
-     this file's real published URL.
+  *** ZAROORI: sw.js bhi upload karo ***
+  Monetag ke Push / In-Page Push formats (jo MultiTag ke andar
+  included hain) kaam karne ke liye aapki di gayi sw.js file
+  DOMAIN KE ROOT PE honi chahiye:
+      https://dflixads.netlify.app/sw.js
+  (kisi sub-folder me NAHI - warna push wala hissa kaam nahi karega).
+  Wo file already is zip ke root me "sw.js" naam se di hui hai -
+  usko seedha apne Netlify site ke root me daal do.
+
+  Neeche jo <script> tag hai wo aapki di hui sw.js (zoneId 11382599,
+  domain 3nbf4.com) ke hisaab se banaya gaya hai. Agar aapke Monetag
+  dashboard me "Get tag" karne par thoda alag/different script mile
+  (kabhi kabhi exact filename/path badal jaata hai), to us asli
+  tag se ye replace kar dena - sabse reliable yahi hai ki jo dashboard
+  me dikhe wahi paste karo.
 -->
 <html>
 <head>
 <meta charset="UTF-8">
-  <meta name="monetag" content="915556afcb4bd8247b7f270386e0677c">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
   html, body {
@@ -38,37 +38,10 @@
 </style>
 </head>
 <body>
-<script>
-  atOptions = {
-    'key' : '9f98825a271504e0be06c0e33ad3d21f',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/9f98825a271504e0be06c0e33ad3d21f/invoke.js"></script>
 
-<!-- ================================================================
-     PASTE YOUR ADSTERRA AD-ZONE SCRIPT SNIPPET HERE (banner, 320x50).
-     It will look something like:
-
-     <script type="text/javascript">
-       atOptions = {
-         'key' : 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-         'format' : 'iframe',
-         'height' : 50,
-         'width' : 320,
-         'params' : {}
-       };
-     </script>
-     <script type="text/javascript"
-       src="//www.highperformanceformat.com/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/invoke.js">
-     </script>
-
-     Copy the real snippet from your Adsterra dashboard and paste it
-     right here, replacing this comment block.
-     ================================================================ -->
+<!-- Monetag MultiTag (Onclick + Push + In-Page Push + Vignette Banner,
+     all bundled under one zone) -->
+<script src='//3nbf4.com/tag.min.js' data-zone='11382599' async data-cfasync='false'></script>
 
 </body>
 </html>
