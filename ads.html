@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+  ADS.HTML — upload this file to your real hosted domain
+  (https://dflixads.netlify.app/ads.html)
+
+  App ka assets/index.html LOCAL hi rehta h (file:///android_asset/) -
+  login/session pe koi asar nahi. Sirf ye chhoti si file real http(s)
+  domain (Netlify) pe hosted h, aur app iski ek iframe strip bottom-nav
+  ke upar dikhata h. Monetag apna ad isi hosted origin ke andar
+  dikhata h.
+
+  ABHI SIRF EK ZONE LAGA H (263248 - MultiTag). Baaki 4 zones tumne
+  diye h (11382891 vignette, 11382899, 11382900, 11382901) - unko
+  "ek ek karke" test karne ke liye, neeche EXTRA_TAGS comment block me
+  rakhe h. Jab pehla wala test/live ho jaye aur theek chale, to neeche
+  se ek line uncomment kar ke agla zone bhi add kar sakte ho (ya isi
+  script ko replace kar ke switch kar sakte ho) - APP REBUILD KI
+  ZAROORAT NAHI, bas ye hosted file update karo.
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  html, body {
+    margin: 0; padding: 0;
+    background: #06060a;
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; height: 100%;
+    overflow: hidden;
+  }
+</style>
+</head>
+<body>
+
+<!-- ACTIVE: Monetag MultiTag zone 263248 -->
+<script src="https://quge5.com/88/tag.min.js" data-zone="263248" async data-cfasync="false"></script>
+
+<!-- EXTRA_TAGS (abhi OFF hain - ek ek karke test karne ke liye)
+     Jab pehla zone theek chal jaye, in me se koi ek line uncomment
+     karo (ya swap karo), ye file dobara upload karo - bas.
+
+<script>(function(s){s.dataset.zone='11382891',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
+<script src="https://5gvci.com/act/files/tag.min.js?z=11382899" data-cfasync="false" async></script>
+
+<script>(function(s){s.dataset.zone='11382900',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
+<script>(function(s){s.dataset.zone='11382901',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+-->
+
+</body>
+</html>
