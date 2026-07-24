@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+  ADS_INTERSTITIAL.HTML — upload this to your real hosted domain too
+  (same GitHub Pages repo as app.js and ads.html:
+  https://danishansaris04.github.io/dflixadmin/ads_interstitial.html)
+
+  This page is opened full-screen by InterstitialAdActivity.java every
+  ~3 minutes while the user is browsing (never during video playback,
+  since playback happens in a separate native player/app).
+
+  WHICH ADSTERRA AD FORMAT TO USE HERE:
+  Adsterra doesn't sell a literal "video ad every N minutes" product by
+  that name - the closest matches for a full-screen periodic ad are:
+
+  OPTION A - "Popunder" zone (most common for this exact use-case):
+    Paste your Popunder script below. It typically fires on its own as
+    soon as this page loads (no extra step needed).
+
+  OPTION B - "In-Page Push" or "Social Bar" zone:
+    Also just paste the script tag below - these render their own
+    UI/video content inside this page automatically.
+
+  Whichever zone type you pick in the Adsterra dashboard, the
+  integration here is the same: paste the snippet in the marked spot.
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  html, body {
+    margin: 0; padding: 0;
+    background: #000;
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+</style>
+</head>
+<body>
+<script src="https://pl30512012.effectivecpmnetwork.com/8c/c0/5a/8cc05a8bb7f77a507f2c6522e44814d5.js"></script>
+
+<!-- ================================================================
+     PASTE YOUR ADSTERRA POPUNDER / IN-PAGE PUSH / SOCIAL BAR SNIPPET
+     HERE. Example (Popunder):
+
+     <script type="text/javascript"
+       src="//plxxxxxxx.highperformanceformat.com/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/invoke.js">
+     </script>
+
+     Copy the real snippet from your Adsterra dashboard and paste it
+     right here, replacing this comment block.
+     ================================================================ -->
+
+</body>
+</html>
