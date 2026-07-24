@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <!--
-  ADS_INTERSTITIAL.HTML — upload this to your real hosted domain
-  (https://dflixads.netlify.app/ads_interstitial.html)
+  ADS_INTERSTITIAL.HTML — upload this to your real hosted domain too
+  (same GitHub Pages repo as app.js and ads.html:
+  https://danishansaris04.github.io/dflixadmin/ads_interstitial.html)
 
-  This plays an ACTUAL VIDEO ad using Adsterra's VAST format, via
-  Google's free IMA HTML5 SDK (the standard, reliable way to play any
-  VAST/VPAID video ad tag - not Adsterra-specific, works with any VAST
-  provider).
+  This page is opened full-screen by InterstitialAdActivity.java every
+  ~3 minutes while the user is browsing (never during video playback,
+  since playback happens in a separate native player/app).
 
-  *** WHAT YOU NEED TO DO ***
-  1. In your Adsterra dashboard, create a NEW zone with type "VAST"
-     (this is different from Popunder/Social Bar/In-Page Push - look
-     for "Video Ads" / "VAST" when adding a zone).
-  2. Adsterra will give you a VAST TAG URL (an https:// link ending
-     roughly like ".../vast.xml?..." or similar).
-  3. Paste that URL into VAST_TAG_URL below, replacing the placeholder.
-  4. Upload this file to dflixads.netlify.app (same place as ads.html).
+  WHICH ADSTERRA AD FORMAT TO USE HERE:
+  Adsterra doesn't sell a literal "video ad every N minutes" product by
+  that name - the closest matches for a full-screen periodic ad are:
 
-  That's it - no other code changes needed. If the video ad fails to
-  load (no fill, bad tag, no internet) this auto-closes to avoid users
-  being stuck on a black screen.
+  OPTION A - "Popunder" zone (most common for this exact use-case):
+    Paste your Popunder script below. It typically fires on its own as
+    soon as this page loads (no extra step needed).
+
+  OPTION B - "In-Page Push" or "Social Bar" zone:
+    Also just paste the script tag below - these render their own
+    UI/video content inside this page automatically.
+
+  Whichever zone type you pick in the Adsterra dashboard, the
+  integration here is the same: paste the snippet in the marked spot.
 -->
 <html>
 <head>
@@ -30,98 +32,26 @@
     margin: 0; padding: 0;
     background: #000;
     width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
     overflow: hidden;
   }
-  #adContainer, #contentElement {
-    position: absolute; top: 0; left: 0;
-    width: 100%; height: 100%;
-  }
-  #contentElement { background: #000; }
 </style>
 </head>
 <body>
-
-<div id="adContainer">
-  <!-- IMA SDK needs a "content" video element to attach next to, even
-       though we have no real content here - it stays hidden/blank and
-       is just used as an anchor for the ad UI. -->
-  <video id="contentElement" muted playsinline webkit-playsinline></video>
-</div>
-
-<script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-<script>
-
 <script src="https://pl30512012.effectivecpmnetwork.com/8c/c0/5a/8cc05a8bb7f77a507f2c6522e44814d5.js"></script>
+<script src="https://pl30512010.effectivecpmnetwork.com/90/60/7d/90607dd81dc29ac48838fe13181a5e8a.js"></script>
 
-  // ================================================================
-  // PASTE YOUR ADSTERRA VAST TAG URL HERE (from the VAST zone you
-  // create in the Adsterra dashboard):
-  var VAST_TAG_URL = "PASTE_YOUR_ADSTERRA_VAST_TAG_URL_HERE";
-  // ================================================================
+<!-- ================================================================
+     PASTE YOUR ADSTERRA POPUNDER / IN-PAGE PUSH / SOCIAL BAR SNIPPET
+     HERE. Example (Popunder):
 
-  var adContainer = document.getElementById('adContainer');
-  var contentElement = document.getElementById('contentElement');
-  var adsManager, adsLoader, adDisplayContainer;
+     <script type="text/javascript"
+       src="//plxxxxxxx.highperformanceformat.com/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/invoke.js">
+     </script>
 
-  function closeOut() {
-    // Nothing further to do here - InterstitialAdActivity's own "Skip"
-    // button (native side) is what actually closes the screen. This
-    // just stops trying to play anything further if the ad fails/ends.
-    try { if (adsManager) adsManager.destroy(); } catch (e) {}
-  }
-
-  function initAds() {
-    adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, contentElement);
-    adsLoader = new google.ima.AdsLoader(adDisplayContainer);
-
-    adsLoader.addEventListener(
-      google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,
-      onAdsManagerLoaded, false);
-    adsLoader.addEventListener(
-      google.ima.AdErrorEvent.Type.AD_ERROR,
-      onAdError, false);
-
-    var adsRequest = new google.ima.AdsRequest();
-    adsRequest.adTagUrl = VAST_TAG_URL;
-    adsRequest.linearAdSlotWidth = window.innerWidth;
-    adsRequest.linearAdSlotHeight = window.innerHeight;
-    adsRequest.nonLinearAdSlotWidth = window.innerWidth;
-    adsRequest.nonLinearAdSlotHeight = window.innerHeight;
-
-    adsLoader.requestAds(adsRequest);
-  }
-
-  function onAdsManagerLoaded(adsManagerLoadedEvent) {
-    adsManager = adsManagerLoadedEvent.getAdsManager(contentElement);
-    adsManager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, onAdError);
-    adsManager.addEventListener(
-      google.ima.AdEvent.Type.ALL_ADS_COMPLETED, closeOut);
-
-    try {
-      adDisplayContainer.initialize();
-      adsManager.init(window.innerWidth, window.innerHeight, google.ima.ViewMode.NORMAL);
-      adsManager.start();
-    } catch (adError) {
-      closeOut();
-    }
-  }
-
-  function onAdError(adErrorEvent) {
-    // No fill / bad tag / network issue - just stop, native "Skip"
-    // button lets the user leave.
-    closeOut();
-  }
-
-  // IMA requires a user gesture on some platforms; since this WebView
-  // has setMediaPlaybackRequiresUserGesture(false), we can init on load.
-  window.addEventListener('load', function () {
-    try {
-      initAds();
-    } catch (e) {
-      closeOut();
-    }
-  });
-</script>
+     Copy the real snippet from your Adsterra dashboard and paste it
+     right here, replacing this comment block.
+     ================================================================ -->
 
 </body>
 </html>
