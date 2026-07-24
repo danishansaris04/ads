@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <!--
   ADS.HTML — upload this file to your real hosted domain
-  (https://dflixads.netlify.app/ads.html)
+  (e.g. the same GitHub Pages repo where app.js already lives:
+  https://danishansaris04.github.io/dflixadmin/ads.html)
 
-  App ka assets/index.html LOCAL hi rehta h (file:///android_asset/) -
-  login/session pe koi asar nahi. Sirf ye chhoti si file real http(s)
-  domain (Netlify) pe hosted h, aur app iski ek iframe strip bottom-nav
-  ke upar dikhata h. Monetag apna ad isi hosted origin ke andar
-  dikhata h.
+  This tiny page's ONLY job is to run the Adsterra script inside a
+  document whose origin is a real http(s) domain. The main app
+  (index.html) stays local inside assets/ and loads THIS page inside
+  an <iframe>, so your login flow (Android.login / TokenManager) is
+  never touched or put at risk.
 
-  ABHI SIRF EK ZONE LAGA H (263248 - MultiTag). Baaki 4 zones tumne
-  diye h (11382891 vignette, 11382899, 11382900, 11382901) - unko
-  "ek ek karke" test karne ke liye, neeche EXTRA_TAGS comment block me
-  rakhe h. Jab pehla wala test/live ho jaye aur theek chale, to neeche
-  se ek line uncomment kar ke agla zone bhi add kar sakte ho (ya isi
-  script ko replace kar ke switch kar sakte ho) - APP REBUILD KI
-  ZAROORAT NAHI, bas ye hosted file update karo.
+  STEPS:
+  1. Go to your Adsterra dashboard -> add this exact domain
+     (danishansaris04.github.io or your own domain) as a site.
+  2. Create a "Banner" ad zone sized 320x50 (matches the iframe's
+     height of 50px set in index.html).
+  3. Adsterra will give you a <script> snippet - paste it below,
+     replacing the placeholder comment.
+  4. Upload this file next to app.js on GitHub Pages (or Firebase
+     Hosting / Netlify - anywhere that gives you a real https URL).
+  5. Make sure the <iframe src="..."> in assets/index.html points to
+     this file's real published URL.
 -->
 <html>
 <head>
@@ -32,22 +37,37 @@
 </style>
 </head>
 <body>
+<script>
+  atOptions = {
+    'key' : '9f98825a271504e0be06c0e33ad3d21f',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/9f98825a271504e0be06c0e33ad3d21f/invoke.js"></script>
 
-<!-- ACTIVE: Monetag MultiTag zone 263248 -->
-<script src="https://quge5.com/88/tag.min.js" data-zone="263248" async data-cfasync="false"></script>
+<!-- ================================================================
+     PASTE YOUR ADSTERRA AD-ZONE SCRIPT SNIPPET HERE (banner, 320x50).
+     It will look something like:
 
-<!-- EXTRA_TAGS (abhi OFF hain - ek ek karke test karne ke liye)
-     Jab pehla zone theek chal jaye, in me se koi ek line uncomment
-     karo (ya swap karo), ye file dobara upload karo - bas.
+     <script type="text/javascript">
+       atOptions = {
+         'key' : 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+         'format' : 'iframe',
+         'height' : 50,
+         'width' : 320,
+         'params' : {}
+       };
+     </script>
+     <script type="text/javascript"
+       src="//www.highperformanceformat.com/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/invoke.js">
+     </script>
 
-<script>(function(s){s.dataset.zone='11382891',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-
-<script src="https://5gvci.com/act/files/tag.min.js?z=11382899" data-cfasync="false" async></script>
-
-<script>(function(s){s.dataset.zone='11382900',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-
-<script>(function(s){s.dataset.zone='11382901',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
--->
+     Copy the real snippet from your Adsterra dashboard and paste it
+     right here, replacing this comment block.
+     ================================================================ -->
 
 </body>
 </html>
