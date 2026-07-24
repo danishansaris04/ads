@@ -3,25 +3,19 @@
   ADS.HTML — upload this file to your real hosted domain
   (https://dflixads.netlify.app/ads.html)
 
-  Adsterra hata diya, ab Monetag lagaya hai. Ye page bottom-nav ke
-  upar wali 50px banner strip me iframe se load hota hai
-  (assets/index.html -> #adBanner -> <iframe src=".../ads.html">).
+  App ka assets/index.html LOCAL hi rehta h (file:///android_asset/) -
+  login/session pe koi asar nahi. Sirf ye chhoti si file real http(s)
+  domain (Netlify) pe hosted h, aur app iski ek iframe strip bottom-nav
+  ke upar dikhata h. Monetag apna ad isi hosted origin ke andar
+  dikhata h.
 
-  *** ZAROORI: sw.js bhi upload karo ***
-  Monetag ke Push / In-Page Push formats (jo MultiTag ke andar
-  included hain) kaam karne ke liye aapki di gayi sw.js file
-  DOMAIN KE ROOT PE honi chahiye:
-      https://dflixads.netlify.app/sw.js
-  (kisi sub-folder me NAHI - warna push wala hissa kaam nahi karega).
-  Wo file already is zip ke root me "sw.js" naam se di hui hai -
-  usko seedha apne Netlify site ke root me daal do.
-
-  Neeche jo <script> tag hai wo aapki di hui sw.js (zoneId 11382599,
-  domain 3nbf4.com) ke hisaab se banaya gaya hai. Agar aapke Monetag
-  dashboard me "Get tag" karne par thoda alag/different script mile
-  (kabhi kabhi exact filename/path badal jaata hai), to us asli
-  tag se ye replace kar dena - sabse reliable yahi hai ki jo dashboard
-  me dikhe wahi paste karo.
+  ABHI SIRF EK ZONE LAGA H (263248 - MultiTag). Baaki 4 zones tumne
+  diye h (11382891 vignette, 11382899, 11382900, 11382901) - unko
+  "ek ek karke" test karne ke liye, neeche EXTRA_TAGS comment block me
+  rakhe h. Jab pehla wala test/live ho jaye aur theek chale, to neeche
+  se ek line uncomment kar ke agla zone bhi add kar sakte ho (ya isi
+  script ko replace kar ke switch kar sakte ho) - APP REBUILD KI
+  ZAROORAT NAHI, bas ye hosted file update karo.
 -->
 <html>
 <head>
@@ -39,9 +33,21 @@
 </head>
 <body>
 
-<!-- Monetag MultiTag (Onclick + Push + In-Page Push + Vignette Banner,
-     all bundled under one zone) -->
-<script src='//3nbf4.com/tag.min.js' data-zone='11382599' async data-cfasync='false'></script>
+<!-- ACTIVE: Monetag MultiTag zone 263248 -->
+<script src="https://quge5.com/88/tag.min.js" data-zone="263248" async data-cfasync="false"></script>
+
+<!-- EXTRA_TAGS (abhi OFF hain - ek ek karke test karne ke liye)
+     Jab pehla zone theek chal jaye, in me se koi ek line uncomment
+     karo (ya swap karo), ye file dobara upload karo - bas.
+
+<script>(function(s){s.dataset.zone='11382891',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
+<script src="https://5gvci.com/act/files/tag.min.js?z=11382899" data-cfasync="false" async></script>
+
+<script>(function(s){s.dataset.zone='11382900',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
+<script>(function(s){s.dataset.zone='11382901',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+-->
 
 </body>
 </html>
